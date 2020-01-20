@@ -23,4 +23,17 @@ spec:
                 - containerPort: 80 # this allows it to map to the port 80 inside the image
 
     # now we can create a service, this service will allow use to communicate with the application.
-    
+--- 
+kind: Service # you want to map you port into one single service
+apiVersion: v1
+metadata: # describes the name of this service
+    name: testapplication-angular8-service
+spec: 
+    selector:
+        app: testapplication-angular8
+    ports:
+    - protocol: TCP # port type
+      port: 80
+      targetPort: 80 
+      nodePort: 32200 # you can use any value between 13,000
+    type: NodePort # we use node port because we can't use load balancer in our application.

@@ -1,0 +1,13 @@
+kind: Service # you want to map you port into one single service
+apiVersion: v1
+metadata: # describes the name of this service
+    name: testapplication-angular8-service
+spec: 
+    selector:
+        app: testapplication-angular8-service
+    ports:
+    - protocol: TCP # port type
+      port: 80
+      targetPort: 80 
+      nodePort: 31000 # you can use any value between 13,000
+    type: NodePort # we use node port because we can't use load balancer in our application.

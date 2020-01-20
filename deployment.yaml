@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # This is the version of 
+                    # the api, when we want to deploy our application, 
+                    # the kubernetes api will read this file understand it and try to provision 
+                    # the pods needed to run the app
+
+kind: Deployment
+metadata:
+    name: testapplication-angular8
+spec:
+    selector:
+        matchLabels:
+            app: testapplication-angular8
+    replicas: 1 # a docker image and 1 pod
+    template: # template specifies the parameter to give information about the application
+        metadata:
+            labels:
+                app: testapplication-angular8
+        spec: # which container we want to use
+            containers: # where does this conatiner leave
+            - name: testapplication-angular8 # what is the name of container
+              image: ugolole/testapplication-angular8:1.0 # specify the image of your container
+              ports:
+                - containerPort: 80 # this allows it to map to the port 80 inside the image
+
+    # now we can create a service, this service will allow use to communicate with the application.
+    
